@@ -38,12 +38,13 @@ router.post('/reg', function(req, res) {
     var md5 = crypto.createHash('md5');
     password = md5.update(password).digest('hex');
 
+    // question
     User.find({ name: name }, function(err, user) {
-        // console.log(user);
+        console.log(user.length);
         if (user.length > 0) {
-            req.flash('error', '用户已存在!');
-            return res.redirect('/reg');
-            
+            // req.flash('error', '用户已存在!');
+            // return res.redirect('back');
+            return res.render('reg', { title: '用户注册', error: '用户已存在!' });
         };
     });
 
