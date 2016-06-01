@@ -8,6 +8,15 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+/**
+ * express-session 中间件启用session存储会话
+ * connect-mongo 中间件把会话信息存入数据库
+ * 
+ */ 
+var expressSession = require('express-session');
+var MongoStore = require('connect-mongo')(expressSession);
+var settings = require('./setting');
+
 var app = express();
 
 // view engine setup
@@ -15,12 +24,25 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// session 存储会话信息
+app.use(expressSession({
+  secret: settings.cookieSecret,
+  key: settings.db, //cookie name
+  cookie: {maxAge: 1000 * 60 * 60 * 24 * 30}, //30 days
+  store: new MongoStore({
+    db: settings.db,
+    url: 'mongodb://' + settings.host + '/' + settings.db
+  }),
+  resave: false,
+  saveUninitialized: true
+}));
 
 app.use('/', routes);
 app.use('/users', users);
