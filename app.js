@@ -31,6 +31,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// flash messages 中间件，重定向信息
+var flash = require('connect-flash');
+app.use(flash());
+
 // session 存储会话信息
 app.use(expressSession({
   secret: settings.cookieSecret,
@@ -72,6 +76,10 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
+  locals.user = req.session.user; 
+  locals.success = req.session.success; 
+  locals.error = req.session.error;
+
   res.render('error', {
     message: err.message,
     error: {}

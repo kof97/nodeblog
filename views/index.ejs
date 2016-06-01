@@ -1,7 +1,13 @@
 <%- include header %>
 
+<% if (user != null) { %>
+
+欢迎 <%= user %>
+
+<% } else { %>
 
 主页
 
+<% } %>
 
 <%- include footer %>
