@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
-<title><%= title %></title>
-<link rel="stylesheet" href="/stylesheets/style.css">
+	<meta charset="UTF-8" />
+	<title><%= title %></title>
+	<link rel="stylesheet" href="/stylesheets/style.css">
 </head>
-<body>
+<body ng-app="nodeblog">
 
 <header>
-<h1><%= title %></h1>
+	<h1><%= title %></h1>
 </header>
 
-<nav>
-<span><a title="主页" href="/">home</a></span>
-<span><a title="登录" href="/login">login</a></span>
-<span><a title="注册" href="/reg">register</a></span>
-</nav>
+	<nav>
+		<span><a title="主页" href="#/">home</a></span>
+		<% if (!user) { %>
+			<span><a title="登录" href="#/login">login</a></span>
+			<span><a title="注册" href="#/reg">register</a></span>
+		<% } else { %>
+			<span><a title="登出" href="/logout">logout</a></span>
+		<% }%>
+		
+	</nav>
 
-<article>
