@@ -41,7 +41,7 @@ router.post('/reg', function(req, res) {
     // question
     User.find({ name: name }, function(err, user) {
         if (user.length > 0) {
-            console.log(user.length);
+            // console.log(user.length);
             return res.json({ error: "用户已存在" });
         } else {
             var user = new User({
@@ -69,6 +69,20 @@ router.post('/reg', function(req, res) {
  * 
  */
 router.post('/login', function(req, res) {
+    var name = req.body.name,
+        password = req.body.password;
+
+    var md5 = crypto.createHash('md5');
+    password = md5.update(password).digest('hex');
+
+    User.findOne({name: name, password: password}, function(err, user) {
+        if (user) {
+            req.session.user = user.name;
+            return res.json({error: "success"});
+        } else {
+            return res.json({error: "用户名或密码错误"});
+        };
+    });
 
 });
 
