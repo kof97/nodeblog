@@ -14,9 +14,9 @@ router.get('/', function(req, res, next) {
 
 router.get('/index', function(req, res, next) {
     if (req.session.user) {
-        res.json({ res: "welcome " + req.session.user });
+        res.json({ res: "welcome " + req.session.user, user: 0 });
     } else {
-        res.json({ res: "主页" });
+        res.json({ res: "好久不见，要回来了吗？", user: 1 });
     };
 });
 

@@ -1,3 +1,8 @@
+
+header, footer, nav { display: block }
+
+* { padding: 0; margin: 0; }
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -7,15 +12,8 @@ a {
   color: #00B7FF;
 }
 
-/* inspired by http://yihui.name/cn/ */
-*{padding:0;margin:0;}
-body{width:600px;margin:2em auto;padding:0 2em;font-size:14px;font-family:"Microsoft YaHei";}
-p{line-height:24px;margin:1em 0;}
-header{padding:.5em 0;border-bottom:1px solid #cccccc;}
-nav{position:fixed;left:12em;font-family:"Microsoft YaHei";font-size:1.1em;text-transform:uppercase;width:9em;text-align:right;}
-nav a{display:block;text-decoration:none;padding:.7em 1em;color:#000000;}
-nav a:hover{background-color:#89DAF6;color:#f9f9f9;-webkit-transition:color .2s linear;}
-div .main {font-size:16px;padding-top:.5em;}
-div .main a{color:#dd0000;text-decoration:none;}
-div .main a:hover{color:#333333;text-decoration:underline;}
-.info{font-size:14px;}
+.left { float: left; }
+.right { float: right; }
+
+.navbar-brand { font-size: 1.8em; }
+

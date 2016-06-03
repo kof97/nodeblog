@@ -2,6 +2,9 @@ angular.module('nodeblog', ['ngRoute', 'regServices'])
     .controller('IndexCtrl', function($scope, $http, User) {
         $http.get("/index").success(function(response) {
             $scope.user = response.res;
+            $scope.show = function() {
+                return response.user;
+            };
         });
     })
 
