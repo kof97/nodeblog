@@ -25,6 +25,7 @@ router.get('/index', function(req, res, next) {
  * 
  * 
  */
+router.post('/reg', alreadyLogin);
 router.post('/reg', function(req, res) {
     var name = req.body.name,
         password = req.body.password,
@@ -41,7 +42,6 @@ router.post('/reg', function(req, res) {
     // question
     User.find({ name: name }, function(err, user) {
         if (user.length > 0) {
-            // console.log(user.length);
             return res.json({ error: "用户已存在" });
         } else {
             var user = new User({
@@ -113,5 +113,22 @@ router.get('/logout', function (req, res) {
     req.session.user = null;
     res.redirect('/');
 });
+
+
+
+function notLogin(req, res, next) {
+    if (!req.session.user) {
+        return res.json({ error: "请先登录" });
+    };
+    next();
+}
+
+function alreadyLogin(req, res, next) {
+    if (req.session.user) {
+        return res.json({ error: "用户已登录" });
+    };
+    next();
+}
+
 
 module.exports = router;
