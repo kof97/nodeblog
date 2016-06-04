@@ -1,23 +1,17 @@
-<ul class="list-group" ng-repeat="x in items">
-	<a ng-if="$odd" href="" class="list-group-item">
-		<li class="list-group-item list-group-item-success">
-    		<span class="badge">2016-5-22</span>
-    		Cras justo odio
-  		</li>
-  	</a>
+<ul class="list-group" ng-repeat="x in items | filter:articleList ">
+    <a ng-if="$odd" href="" class="list-group-item">
+        <li class="list-group-item list-group-item-success">
+            <span class="badge">2016-5-22</span>
+            {{ x.title }}
+        </li>
+    </a>
 
-  	<a ng-if="$even" href="" class="list-group-item">
-		<li class="list-group-item list-group-item-info">
-    		<span class="badge">14</span>
-    		Cras justo odio
-  		</li>
-  	</a>
+    <a ng-if="$even" href="" class="list-group-item">
+        <li class="list-group-item list-group-item-info">
+            <span class="badge">2016-5-22</span>
+            {{ x.title }}
+        </li>
+    </a>
 
-  	<a href="" class="list-group-item">
-		<li class="list-group-item">
-    		<span class="badge">14</span>
-    		Cras justo odio
-  		</li>
-  	</a>
-  	
+    
 </ul>

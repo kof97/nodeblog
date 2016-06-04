@@ -9,6 +9,6 @@ angular.module(['regServices'], ['ngResource'])
     .factory('Article', function($resource) {
         return {
         	post: $resource('post', {}, {}),
-        	// login: $resource('login', {}, {})
+        	list: $resource('list', {}, {})
         };
     });

@@ -1,5 +1,5 @@
 angular.module('nodeblog', ['ngRoute', 'regServices', 'ngCookies'])
-    .controller('IndexCtrl', ['$scope', '$cookies', '$http', function($scope, $cookies, $http, User) {
+    .controller('IndexCtrl', ['$scope', '$cookies', '$http', function($scope, $cookies, $http) {
         $http.get("/index").success(function(response) {
             $cookies.put("user", response.u);
             $scope.user = response.res;
@@ -89,11 +89,17 @@ angular.module('nodeblog', ['ngRoute', 'regServices', 'ngCookies'])
 
     })
 
-    .controller("ListCtrl", function($scope) {
+    .controller("ListCtrl", ['$scope', '$http', function($scope, $http) {
+        $http.get("/list").success(function(response) {
+            $scope.items = response;
+        });
 
-    })
+        $scope.items = function() {
 
-    .controller("WriteCtrl", ['$scope', '$cookies', function($scope, $cookies, Article) {
+        }
+    }])
+
+    .controller("WriteCtrl", ['$scope', '$cookies', '$location', 'Article', function($scope, $cookies, $location, Article) {
         $scope.title = "";
         $scope.content = "";
 
@@ -107,8 +113,12 @@ angular.module('nodeblog', ['ngRoute', 'regServices', 'ngCookies'])
             Article.post.save({}, article, function(res) {
                 $scope.reset();
 
+                if (res.error == "success") {
+                    $location.path('/list');
+                } else {
+                    $scope.error = res.error; 
+                };
 
-                
             }, function(err) {
                 $scope.reset();
                 $scope.error = "文章发布失败，请重试";

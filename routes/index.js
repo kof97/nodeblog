@@ -97,8 +97,46 @@ router.post('/post', function (req, res) {
         title = req.body.title,
         content = req.body.content;
 
-    console.log(user);
+    User.findOne({name: user}, function(err, user) {
+        if (user) {
+            var article = new Article({
+                user: user.name,
+                title: title,
+                content: content
+            });
+            article.save(function(err, article) {
+                if (err || !article) {
+                    throw 'Error';
+                } else {
+                    return res.json({ error: "success" });
+                }   
+            });
 
+        } else {
+            return res.json({error: "该用户不存在"});
+        };
+    });
+
+
+});
+
+/**
+ * article list.
+ * 
+ * 
+ */
+router.get('/list', function (req, res) {
+    if (req.session.user) {
+        Article.find({user: req.session.user}, function(err, article) {
+            if (article) {
+                return res.json(article);
+            } else {
+                return res.json({});
+            };
+        });
+    } else {
+        return res.json({});
+    }; 
 
 });
 
