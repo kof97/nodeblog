@@ -131,6 +131,13 @@ angular.module('nodeblog', ['ngRoute', 'regServices', 'ngCookies'])
         };
     }])
 
+    .controller("ArticleCtrl", ['$scope', '$http', '$routeParams', 'Article', function($scope, $http, $routeParams, Article) {
+        var id = $routeParams.articleId;
+        $http.get('/article/' + id).success(function(response) {
+            $scope.article = response;
+        });
+    }])
+
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.
             when('/', { templateUrl: 'parts/index.html', controller: 'IndexCtrl' }).
@@ -139,5 +146,6 @@ angular.module('nodeblog', ['ngRoute', 'regServices', 'ngCookies'])
 
             when('/write', { templateUrl: 'parts/write.html', controller: 'WriteCtrl' }).
             when('/list', { templateUrl: 'parts/list.html', controller: 'ListCtrl' }).
+            when('/article/:articleId', { templateUrl: 'parts/article.html', controller: 'ArticleCtrl' }).
             otherwise({ redirectTo: '/' });
     }]);

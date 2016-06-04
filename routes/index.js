@@ -141,6 +141,22 @@ router.get('/list', function (req, res) {
 });
 
 /**
+ * article.
+ * 
+ * 
+ */
+router.get('/article/:id', function(req, res) {
+    Article.findById(req.params.id, '', { lean: true }, function(err, article) {
+        if (article) {
+            return res.json(article);
+        } else {
+            return res.json({});
+        };
+    });
+
+});
+
+/**
  * logout.
  * 
  * 
