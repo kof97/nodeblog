@@ -6,22 +6,14 @@
     <div class="input-group">
         <span class="input-group-addon" id="basic-addon1">密 码：</span>
         <input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1" ng-model="password" required>
-    </div>
+    </div><br>
 
-    <div class="alert alert-danger" role="alert">
-        <a href="#" class="alert-link">...</a>
-    </div>
+    <input type="submit" class="btn btn-primary active" role="button" value="Login"><br><br>
+
+    <div class="alert alert-danger" role="alert" ng-model="error" ng-show="error">{{ error }}</div>
 </form>
     
 <div class="clearfix"></div>
 
 
-<br><br><br><br>
-<br>
-<form ng-submit="login()">
-  用户名：<input type="text" ng-model="name" required /><br />
-  密 &nbsp; 码：<input type="password" ng-model="password" required /><br />
-         <input type="submit" value="登录"/>
-</form>
 
-<span style="color:#FF8080" ng-model="error">{{ error }}</span>

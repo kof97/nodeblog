@@ -18,3 +18,5 @@ a {
 .navbar-brand { font-size: 1.8em; }
 
 .login-page { width: 60%; }
+
+.edit-area { width: 100%; resize: none; font-size: 1.4em; padding: 0 5px; }

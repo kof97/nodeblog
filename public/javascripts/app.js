@@ -1,12 +1,13 @@
-angular.module('nodeblog', ['ngRoute', 'regServices'])
-    .controller('IndexCtrl', function($scope, $http, User) {
+angular.module('nodeblog', ['ngRoute', 'regServices', 'ngCookies'])
+    .controller('IndexCtrl', ['$cookies', function($scope, $http, User, $cookies) {
         $http.get("/index").success(function(response) {
+            $cookies.put("user", response.res);
             $scope.user = response.res;
             $scope.show = function() {
                 return response.user;
             };
         });
-    })
+    }])
 
     .controller('RegCtrl', function($scope, User) {
         $scope.name = "";
@@ -88,10 +89,37 @@ angular.module('nodeblog', ['ngRoute', 'regServices'])
 
     })
 
+    .controller("ListCtrl", function($scope) {
+
+    })
+
+    .controller("WriteCtrl", ['$cookies', function($scope, $cookies) {
+        $scope.title = "";
+        $scope.content = "";
+
+        $scope.publish = function() {
+            var article = {
+                user: $cookies.get("user"),
+                title: $scope.title,
+                content: $scope.content
+            }
+
+            console.log(article.user);
+        };
+
+        $scope.reset = function() {
+            $scope.title = "";
+            $scope.content = "";
+        };
+    }])
+
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.
             when('/', { templateUrl: 'parts/index.html', controller: 'IndexCtrl' }).
             when('/reg', { templateUrl: 'parts/reg.html', controller: 'RegCtrl' }).
             when('/login', { templateUrl: 'parts/login.html', controller: 'LoginCtrl' }).
+
+            when('/write', { templateUrl: 'parts/write.html', controller: 'WriteCtrl' }).
+            when('/list', { templateUrl: 'parts/list.html', controller: 'ListCtrl' }).
             otherwise({ redirectTo: '/' });
     }]);

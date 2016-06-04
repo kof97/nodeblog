@@ -1,13 +1,27 @@
+<form ng-submit="submit()" class="login-page center-block">
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">用户名：</span>
+        <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" ng-model="name" required>
+    </div><br>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">密 码：</span>
+        <input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1" ng-model="password" required>
+    </div><br>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">确认密码：</span>
+        <input type="password" class="form-control" placeholder="Repeat your password" aria-describedby="basic-addon1" ng-model="passwordRepeat" required>
+    </div><br>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">邮 箱：</span>
+        <input type="email" class="form-control" placeholder="email" aria-describedby="basic-addon1" ng-model="email" required>
+    </div><br>
 
-<form ng-submit="submit()">
-  用户名：  <input type="text" ng-model="name"/><br />
-  密码：    <input type="password" ng-model="password"/><br />
-  确认密码：<input type="password" ng-model="passwordRepeat"/><br />
-  邮箱：    <input type="email" ng-model="email"/><br />
-           <input type="submit" value="注册"/><br />
+    <input type="submit" class="btn btn-primary active" role="button" value="Register"><br><br>
 
-	<span style="color:#FF8080" ng-model="error">{{ error }}</span>
+    <div class="alert alert-danger" role="alert" ng-model="error" ng-show="error">{{ error }}</div>
 </form>
+    
+<div class="clearfix"></div>
 
 
 

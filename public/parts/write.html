@@ -1,0 +1,15 @@
+<form ng-submit="publish()">
+	<div class="input-group center-block">
+        <span class="input-group-addon" id="basic-addon1"><strong>标题：</strong></span>
+        <input type="text" class="form-control" ng-model="title" aria-describedby="basic-addon1" required>
+    </div>
+
+    <div class="input-group center-block">
+    	<textarea rows="15" class="edit-area" ng-model="content"></textarea>
+
+    </div><br>
+	
+	<input type="submit" class="btn btn-primary active" role="button" value="发布"><br><br>
+
+	<div class="alert alert-danger" role="alert" ng-model="error" ng-show="error">{{ error }}</div>
+</form>
