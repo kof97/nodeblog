@@ -4,7 +4,8 @@ var router = express.Router();
 // crypto
 var crypto = require('crypto'),
     User = require('../models/user.js'),
-    Article = require('../models/article.js');
+    Article = require('../models/article.js'),
+    markdown = require('markdown').markdown;
 
 router.get('/', function(req, res, next) {
     res.render('index', { 
@@ -95,7 +96,7 @@ router.post('/login', function(req, res) {
 router.post('/post', function (req, res) {
     var user = req.body.user,
         title = req.body.title,
-        content = req.body.content;
+        content = markdown.toHTML(req.body.content);
 
     User.findOne({name: user}, function(err, user) {
         if (user) {
@@ -116,7 +117,6 @@ router.post('/post', function (req, res) {
             return res.json({error: "该用户不存在"});
         };
     });
-
 
 });
 
