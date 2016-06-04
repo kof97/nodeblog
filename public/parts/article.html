@@ -2,7 +2,7 @@
 	<h1 class="text-center">{{ article.title }}</h1>
 	
 	<div class="panel">
-		<div class="panel-body">
+		<div class="panel-body" ng-bind-html="article.content">
 			{{ article.content }}
 		</div>
 	</div>
