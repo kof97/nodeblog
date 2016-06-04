@@ -96,7 +96,7 @@ router.post('/login', function(req, res) {
 router.post('/post', function (req, res) {
     var user = req.body.user,
         title = req.body.title,
-        content = markdown.toHTML(req.body.content);
+        content = req.body.content;
 
     User.findOne({name: user}, function(err, user) {
         if (user) {
@@ -117,6 +117,7 @@ router.post('/post', function (req, res) {
             return res.json({error: "该用户不存在"});
         };
     });
+
 
 });
 
@@ -148,6 +149,7 @@ router.get('/list', function (req, res) {
 router.get('/article/:id', function(req, res) {
     Article.findById(req.params.id, '', { lean: true }, function(err, article) {
         if (article) {
+            article.content = markdown.toHTML(article.content);
             return res.json(article);
         } else {
             return res.json({});
