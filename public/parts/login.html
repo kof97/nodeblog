@@ -1,4 +1,23 @@
+<form ng-submit="login()" class="login-page center-block">
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">用户名：</span>
+        <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" ng-model="name" required>
+    </div><br>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">密 码：</span>
+        <input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1" ng-model="password" required>
+    </div>
 
+    <div class="alert alert-danger" role="alert">
+        <a href="#" class="alert-link">...</a>
+    </div>
+</form>
+    
+<div class="clearfix"></div>
+
+
+<br><br><br><br>
+<br>
 <form ng-submit="login()">
   用户名：<input type="text" ng-model="name" required /><br />
   密 &nbsp; 码：<input type="password" ng-model="password" required /><br />
