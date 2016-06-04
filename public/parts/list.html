@@ -1,4 +1,4 @@
-<ul class="list-group" ng-repeat="x in items | filter:articleList ">
+<ul class="list-group" ng-repeat="x in items | filter: articleList | orderBy: x.time: true">
     <a ng-if="$odd" href="#/article/{{ x._id }}" class="list-group-item">
         <li class="list-group-item list-group-item-success">
             <span class="badge">{{ x.time }}</span>
