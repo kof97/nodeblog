@@ -3,7 +3,8 @@ var router = express.Router();
 
 // crypto
 var crypto = require('crypto'),
-    User = require('../models/user.js');
+    User = require('../models/user.js'),
+    Article = require('../models/article.js');
 
 router.get('/', function(req, res, next) {
     res.render('index', { 
@@ -14,9 +15,9 @@ router.get('/', function(req, res, next) {
 
 router.get('/index', function(req, res, next) {
     if (req.session.user) {
-        res.json({ res: "welcome " + req.session.user, user: 0 });
+        res.json({ res: "welcome " + req.session.user, user: 0, u: req.session.user });
     } else {
-        res.json({ res: "好久不见，要回来了吗？", user: 1 });
+        res.json({ res: "好久不见，要回来了吗？", user: 1, u: req.session.user });
     };
 });
 
@@ -87,20 +88,17 @@ router.post('/login', function(req, res) {
 });
 
 /**
- * post article view.
- * 
- * 
- */
-router.get('/post', function (req, res) {
-    res.render('post', { title: '发表文章' });
-});
-
-/**
  * post article operating.
  * 
  * 
  */
 router.post('/post', function (req, res) {
+    var user = req.body.user,
+        title = req.body.title,
+        content = req.body.content;
+
+    console.log(user);
+
 
 });
 

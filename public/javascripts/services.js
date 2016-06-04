@@ -4,4 +4,11 @@ angular.module(['regServices'], ['ngResource'])
         	reg: $resource('reg', {}, {}),
         	login: $resource('login', {}, {})
         };
+    })
+
+    .factory('Article', function($resource) {
+        return {
+        	post: $resource('post', {}, {}),
+        	// login: $resource('login', {}, {})
+        };
     });

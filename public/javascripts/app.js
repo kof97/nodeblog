@@ -1,7 +1,7 @@
 angular.module('nodeblog', ['ngRoute', 'regServices', 'ngCookies'])
-    .controller('IndexCtrl', ['$cookies', function($scope, $http, User, $cookies) {
+    .controller('IndexCtrl', ['$scope', '$cookies', '$http', function($scope, $cookies, $http, User) {
         $http.get("/index").success(function(response) {
-            $cookies.put("user", response.res);
+            $cookies.put("user", response.u);
             $scope.user = response.res;
             $scope.show = function() {
                 return response.user;
@@ -93,7 +93,7 @@ angular.module('nodeblog', ['ngRoute', 'regServices', 'ngCookies'])
 
     })
 
-    .controller("WriteCtrl", ['$cookies', function($scope, $cookies) {
+    .controller("WriteCtrl", ['$scope', '$cookies', function($scope, $cookies, Article) {
         $scope.title = "";
         $scope.content = "";
 
@@ -104,7 +104,16 @@ angular.module('nodeblog', ['ngRoute', 'regServices', 'ngCookies'])
                 content: $scope.content
             }
 
-            console.log(article.user);
+            Article.post.save({}, article, function(res) {
+                $scope.reset();
+
+
+                
+            }, function(err) {
+                $scope.reset();
+                $scope.error = "文章发布失败，请重试";
+            });
+
         };
 
         $scope.reset = function() {
