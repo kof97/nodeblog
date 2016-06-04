@@ -4,6 +4,7 @@ var db = require('./db.js').db;
 var articleSchema = new mongoose.Schema({ 
     user: String,
     title: String,
+    time: String,
     content: String
 });
 

@@ -100,9 +100,11 @@ router.post('/post', function (req, res) {
 
     User.findOne({name: user}, function(err, user) {
         if (user) {
+            var today = new Date();
             var article = new Article({
                 user: user.name,
                 title: title,
+                time: today.getFullYear() + "-" + today.getMonth() + "-" + today.getDay(),
                 content: content
             });
             article.save(function(err, article) {
@@ -168,8 +170,6 @@ router.get('/logout', function (req, res) {
     res.redirect('/');
 });
 
-
-
 function notLogin(req, res, next) {
     if (!req.session.user) {
         return res.json({ error: "请先登录" });
@@ -183,6 +183,5 @@ function alreadyLogin(req, res, next) {
     };
     next();
 }
-
 
 module.exports = router;
