@@ -86,7 +86,6 @@ angular.module('nodeblog', ['ngRoute', 'regServices', 'ngCookies'])
             $scope.password = "";
         };
 
-
     })
 
     .controller("ListCtrl", ['$scope', '$http', function($scope, $http) {
