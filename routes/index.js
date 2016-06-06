@@ -15,11 +15,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/index', function(req, res, next) {
-    if (req.session.user) {
-        res.json({ res: "welcome " + req.session.user, user: 0, u: req.session.user });
-    } else {
-        res.json({ res: "好久不见，要回来了吗？", user: 1, u: req.session.user });
-    };
+    res.json({});
 });
 
 /**

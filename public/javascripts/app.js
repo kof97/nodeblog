@@ -1,12 +1,6 @@
 angular.module('nodeblog', ['ngRoute', 'regServices', 'ngCookies', 'ngSanitize'])
     .controller('IndexCtrl', ['$scope', '$cookies', '$http', function($scope, $cookies, $http) {
-        $http.get("/index").success(function(response) {
-            $cookies.put("user", response.u);
-            $scope.user = response.res;
-            $scope.show = function() {
-                return response.user;
-            };
-        });
+        
     }])
 
     .controller('RegCtrl', function($scope, User) {
