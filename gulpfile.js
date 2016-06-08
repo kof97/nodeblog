@@ -21,7 +21,7 @@ var gulp = require('gulp'),
     del = require('del');
 
 gulp.task('styles', () =>
-    sass('src/stylesheets/*.css', {style: 'expanded', sourcemap: true})
+    sass('src/stylesheets/*.scss', {style: 'expanded', sourcemap: true})
     .on('error', sass.logError)
     .pipe(sourcemaps.write())
     .pipe(sourcemaps.write('maps', {
@@ -65,14 +65,14 @@ gulp.task('clean', function(cb) {
 });
 
 // Default task
-gulp.task('default', ['clean'], function() {
-    gulp.start('styles', 'scripts', 'images');
+gulp.task('default', [], function() {
+    gulp.start('styles', 'images', 'scripts');
 });
 
 // Watch
 gulp.task('watch', function() {
     // Watch .scss files
-    gulp.watch('src/stylesheets/**/*.css', ['styles']);
+    gulp.watch('src/stylesheets/**/*.scss', ['styles']);
     // Watch .js files
     gulp.watch('src/javascripts/**/*.js', ['scripts']);
     // Watch image files
