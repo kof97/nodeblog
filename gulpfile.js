@@ -20,21 +20,8 @@ var gulp = require('gulp'),
 
     del = require('del');
 
-// Styles
-/*
-gulp.task('styles', function() {
-    return gulp.src('src/styles/*.scss')
-        .pipe(sass({ style: 'expanded', }))
-        .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-        .pipe(gulp.dest('dist/styles'))
-        .pipe(rename({ suffix: '.min' }))
-        .pipe(minifycss())
-        .pipe(gulp.dest('dist/styles'))
-        .pipe(notify({ message: 'Styles task complete' }));
-});*/
-
 gulp.task('styles', () =>
-    sass('src/styles/*.scss', {style: 'expanded', sourcemap: true})
+    sass('src/stylesheets/*.css', {style: 'expanded', sourcemap: true})
     .on('error', sass.logError)
     .pipe(sourcemaps.write())
     .pipe(sourcemaps.write('maps', {
@@ -44,7 +31,7 @@ gulp.task('styles', () =>
 //    .pipe(concat('style.css'))
     .pipe(rename({ suffix: '.min' }))
     .pipe(minifycss())
-    .pipe(gulp.dest('dist/styles'))
+    .pipe(gulp.dest('public/stylesheets'))
     .pipe(notify({ message: 'Styles task complete' }))
 
 );
@@ -52,7 +39,7 @@ gulp.task('styles', () =>
 // Scripts
 gulp.task('scripts', function() {
     var b = browserify({
-        entries: "src/scripts/main.js",
+        entries: "src/javascripts/main.js",
         debug: true
     });
 
@@ -61,30 +48,20 @@ gulp.task('scripts', function() {
         .pipe(buffer())
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(sourcemaps.write("."))
-        .pipe(gulp.dest("dist/scripts"));
-/*
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'))
-        
-        .pipe(gulp.dest('dist/scripts'))
-        .pipe(rename({ suffix: '.min' }))
-        .pipe(uglify())
-        .pipe(gulp.dest('dist/scripts'))
-        .pipe(notify({ message: 'Scripts task complete' }));
-*/
+        .pipe(gulp.dest("public/javascripts"));
 });
 
 // Images
 gulp.task('images', function() {
     return gulp.src('src/images/**/*')
         .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
-        .pipe(gulp.dest('dist/images'))
+        .pipe(gulp.dest('public/images'))
         .pipe(notify({ message: 'Images task complete' }));
 });
 
 // Clean
 gulp.task('clean', function(cb) {
-    del(['dist/assets/css', 'dist/assets/js', 'dist/assets/img'], cb);
+    del(['public/assets/css', 'public/assets/js', 'public/assets/img'], cb);
 });
 
 // Default task
@@ -95,13 +72,13 @@ gulp.task('default', ['clean'], function() {
 // Watch
 gulp.task('watch', function() {
     // Watch .scss files
-    gulp.watch('src/styles/**/*.scss', ['styles']);
+    gulp.watch('src/stylesheets/**/*.css', ['styles']);
     // Watch .js files
-    gulp.watch('src/scripts/**/*.js', ['scripts']);
+    gulp.watch('src/javascripts/**/*.js', ['scripts']);
     // Watch image files
     gulp.watch('src/images/**/*', ['images']);
     // Create LiveReload server
     livereload.listen();
     // Watch any files in dist/, reload on change
-    gulp.watch(['dist/**']).on('change', livereload.changed);
+    gulp.watch(['public/**']).on('change', livereload.changed);
 });
