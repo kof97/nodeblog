@@ -1,4 +1,4 @@
-# `node` `angular.js` 搭建的博客
+# `node` `angular.js` 搭建的博客 （`gulp` && `browserify`）
 
 ---
 
