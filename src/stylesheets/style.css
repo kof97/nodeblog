@@ -1,0 +1,33 @@
+
+header, footer, nav { display: block }
+
+* { padding: 0; margin: 0; }
+
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: url('../images/bg.png') repeat;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.navbar { background: #48525E; margin: 0; }
+.navbar-brand { font-size: 1.8em; color: #fff!important; }
+.navbar-nav > li > a { color: #fff!important; }
+
+.jumbotron { background: none; height: 10%; padding: 1.4em 2em; margin: 0; }
+
+.container-fluid {  }
+
+.list-group { margin: 2px; box-shadow: 1px 1px 1px #E7E9D1; }
+.list-group-item { border: 0; font-size: 1.2em; }
+
+
+
+.login-page { width: 60%; background: #fff; padding: 3em 6em; box-shadow: 1px 1px 1px #000; border-radius: 20px; }
+
+.write-page { background: #fff; padding: 1em 2em; border-radius: 10px; box-shadow: 1px 1px 1px #000; }
+.edit-area { width: 100%; resize: none; font-size: 1.4em; padding: 0 5px; }
+
+.article-title { border-bottom: solid 1px; padding-bottom: 0.4em; }
