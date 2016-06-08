@@ -11,10 +11,9 @@ var gulp = require('gulp'),
     cache = require('gulp-cache'),
     concat = require('gulp-concat'),
     livereload = require('gulp-livereload'),
-    sourcemaps = require('gulp-sourcemaps'),
 
+    sourcemaps = require('gulp-sourcemaps'),
     browserify = require("browserify"),
-    sourcemaps = require("gulp-sourcemaps"),
     source = require('vinyl-source-stream'),
     buffer = require('vinyl-buffer'),
 
